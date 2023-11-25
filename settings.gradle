@@ -1,0 +1,11 @@
+rootProject.name = 'videliver'
+
+include "vid-customer-ms"
+include "vid-delivery-ms"
+include "vid-order-ms"
+include "vid-product-ms"
+include "vid-retailer-ms"
+include "vid-warehouse-ms"
+include 'vid-common'
+include 'vid-payment-ms'
+
