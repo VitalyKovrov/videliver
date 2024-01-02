@@ -1,18 +1,13 @@
 package com.virtaly.videliver.customer.model;
 
 import com.virtaly.videliver.common.model.PersonName;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.Data;
 
 import javax.persistence.*;
 
-@Getter
+@Data
 @Entity
-@NoArgsConstructor
-@AllArgsConstructor
 @Table(name = "customer")
-@Access(AccessType.FIELD)
 public class Customer {
     @Id
     @GeneratedValue
