@@ -1,6 +1,6 @@
-package com.virtaly.videliver.order.model;
+package com.virtaly.videliver.order.dto;
 
-import com.virtaly.videliver.order.controller.dto.CustomerOrder;
+import com.virtaly.videliver.order.dto.CustomerOrder;
 import lombok.Builder;
 import lombok.Data;
 

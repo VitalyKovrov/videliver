@@ -1,4 +1,4 @@
-package com.virtaly.videliver.order.controller.dto;
+package com.virtaly.videliver.payment.dto;
 
 import lombok.Builder;
 import lombok.Data;

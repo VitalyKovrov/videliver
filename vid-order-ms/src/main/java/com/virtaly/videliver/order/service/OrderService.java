@@ -1,9 +1,9 @@
 package com.virtaly.videliver.order.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.virtaly.videliver.order.controller.dto.CustomerOrder;
+import com.virtaly.videliver.order.dto.CustomerOrder;
 import com.virtaly.videliver.order.model.Order;
-import com.virtaly.videliver.order.model.OrderEvent;
+import com.virtaly.videliver.order.dto.OrderEvent;
 import com.virtaly.videliver.order.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
