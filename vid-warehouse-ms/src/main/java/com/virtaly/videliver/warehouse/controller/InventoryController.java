@@ -23,8 +23,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class InventoryController {
     private final InventoryService inventoryService;
-    private final KafkaTemplate<String, InventoryEvent> kafkaInventoryTemplate;
-    private final KafkaTemplate<String, PaymentEvent> kafkaPaymentTemplate;
 
     @PostMapping("/inventory")
     public void addInventory(@RequestBody Stock stock) {
@@ -35,37 +33,13 @@ public class InventoryController {
                 inventoryService.updateInventory(i);
             });
         } else {
-            this.inventoryService.createInventory(stock);
+            inventoryService.createInventory(stock);
         }
     }
 
     @KafkaListener(topics = "new-payments", groupId = "payments-group")
     public void updateInventory(String paymentEvent) throws JsonProcessingException {
         PaymentEvent p = new ObjectMapper().readValue(paymentEvent, PaymentEvent.class);
-        CustomerOrder order = p.getOrder();
-        try {
-            Iterable<Inventory> inventories = inventoryService.findByItem(order.getItem());
-            boolean exists = inventories.iterator().hasNext();
-            if (!exists) {
-                throw new Exception("Stock not available");
-            }
-            inventories.forEach(
-                    i -> {
-                        i.setQuantity(i.getQuantity() - order.getQuantity());
-                        this.inventoryService.updateInventory(i);
-                    });
-            InventoryEvent event = InventoryEvent.builder()
-                    .type("INVENTORY_UPDATED")
-                    .order(p.getOrder())
-                    .build();
-            this.kafkaInventoryTemplate.send("new-inventory", event);
-
-        } catch (Exception e) {
-            PaymentEvent pe = PaymentEvent.builder()
-                    .order(order)
-                    .type("PAYMENT_REVERSED")
-                    .build();
-            this.kafkaPaymentTemplate.send("reversed-payments", pe);
-        }
+        inventoryService.updateInventoryForOrder(p.getOrder());
     }
 }
