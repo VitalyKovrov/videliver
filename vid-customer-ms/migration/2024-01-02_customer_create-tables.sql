@@ -5,10 +5,10 @@
 
 CREATE TABLE IF NOT EXISTS customer
 (
-    id          VARCHAR NOT NULL
-        CONSTRAINT pk_customer PRIMARY KEY,
+    id BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     first_name  VARCHAR NOT NULL,
     last_name   VARCHAR NOT NULL,
+    email VARCHAR UNIQUE
 );
 
 --rollback DROP TABLE IF EXISTS customer;

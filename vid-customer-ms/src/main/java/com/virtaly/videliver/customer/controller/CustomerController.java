@@ -19,7 +19,7 @@ public class CustomerController {
 
     public CreateCustomerResponse createCustomer(@RequestBody CreateCustomerRequest request) {
         log.info("POST /customers - Add a new customer");
-        Customer result = customerService.create(request.getName());
+        Customer result = customerService.create(request);
         return new CreateCustomerResponse(result.getId());
     }
 }

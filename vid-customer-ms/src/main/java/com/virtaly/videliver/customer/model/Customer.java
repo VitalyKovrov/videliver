@@ -1,6 +1,5 @@
 package com.virtaly.videliver.customer.model;
 
-import com.virtaly.videliver.common.model.PersonName;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -13,7 +12,13 @@ public class Customer {
     @GeneratedValue
     private Long id;
 
-    @Embedded
-    private PersonName name;
+    @Column
+    private String firstName;
+
+    @Column
+    private String lastName;
+
+    @Column
+    private String email;
 
 }
