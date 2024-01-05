@@ -62,4 +62,17 @@ public class InventoryService {
             kafkaPaymentTemplate.send("reversed-payments", pe);
         }
     }
+
+    public void reverseInventoryForOrder(CustomerOrder order) {
+        Iterable<Inventory> inv = inventoryRepository.findByItem(order.getItem());
+        inv.forEach(i -> {
+            i.setQuantity(i.getQuantity() + order.getQuantity());
+            inventoryRepository.save(i);
+        });
+        PaymentEvent paymentEvent = PaymentEvent.builder()
+                .order(order)
+                .type("PAYMENT_REVERSED")
+                .build();
+        kafkaPaymentTemplate.send("reversed-payments", paymentEvent);
+    }
 }

@@ -2,7 +2,6 @@ package com.virtaly.videliver.warehouse.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.virtaly.videliver.warehouse.dto.CustomerOrder;
 import com.virtaly.videliver.warehouse.dto.InventoryEvent;
 import com.virtaly.videliver.warehouse.dto.PaymentEvent;
 import com.virtaly.videliver.warehouse.dto.Stock;
@@ -11,7 +10,6 @@ import com.virtaly.videliver.warehouse.service.InventoryService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
-import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -41,5 +39,11 @@ public class InventoryController {
     public void updateInventory(String paymentEvent) throws JsonProcessingException {
         PaymentEvent p = new ObjectMapper().readValue(paymentEvent, PaymentEvent.class);
         inventoryService.updateInventoryForOrder(p.getOrder());
+    }
+
+    @KafkaListener(topics = "reversed-inventory", groupId = "inventory-group")
+    public void reverseInventory(String event) throws JsonProcessingException {
+        InventoryEvent inventoryEvent = new ObjectMapper().readValue(event, InventoryEvent.class);
+        inventoryService.reverseInventoryForOrder(inventoryEvent.getOrder());
     }
 }
