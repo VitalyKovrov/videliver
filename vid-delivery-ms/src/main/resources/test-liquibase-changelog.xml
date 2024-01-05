@@ -6,6 +6,5 @@
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
     <includeAll path="migration"/>
-<!--    <includeAll path="migration-test"/>-->
 
 </databaseChangeLog>
