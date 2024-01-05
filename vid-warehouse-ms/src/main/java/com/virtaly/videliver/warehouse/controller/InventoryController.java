@@ -12,17 +12,19 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @Slf4j
-@RestController("/inventory")
+@RestController
 @RequiredArgsConstructor
+@RequestMapping("/inventory")
 public class InventoryController {
     private final InventoryService inventoryService;
 
-    @PostMapping("/inventory")
+    @PostMapping
     public void addInventory(@RequestBody Stock stock) {
         List<Inventory> items = inventoryService.findByItem(stock.getItem());
         if (items.iterator().hasNext()) {
