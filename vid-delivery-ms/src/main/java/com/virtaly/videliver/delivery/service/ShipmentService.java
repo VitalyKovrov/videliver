@@ -1,6 +1,5 @@
 package com.virtaly.videliver.delivery.service;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.virtaly.videliver.delivery.dto.CustomerOrder;
 import com.virtaly.videliver.delivery.dto.InventoryEvent;
 import com.virtaly.videliver.delivery.model.Shipment;

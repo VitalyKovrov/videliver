@@ -9,7 +9,8 @@ import javax.persistence.*;
 @Table(name = "inventory")
 public class Inventory {
     @Id
-    @GeneratedValue
+    @Column
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column
