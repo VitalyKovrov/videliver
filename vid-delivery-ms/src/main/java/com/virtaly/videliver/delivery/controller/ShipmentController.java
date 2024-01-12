@@ -18,6 +18,7 @@ public class ShipmentController {
 
     @KafkaListener(topics = "new-inventory", groupId = "inventory-group")
     public void updateInventory(String paymentEvent) throws JsonProcessingException {
+        log.info("Received event" + paymentEvent);
         InventoryEvent inventoryEvent = new ObjectMapper().readValue(paymentEvent, InventoryEvent.class);
         CustomerOrder order = inventoryEvent.getOrder();
         this.shipmentService.createShipment(order);

@@ -3,12 +3,10 @@
 --changeset vkovrov@it-one.ru:create_tables
 --comment: Создание таблиц
 
-CREATE TABLE IF NOT EXISTS shipment
+CREATE TABLE IF NOT EXISTS retailer
 (
     id BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    address VARCHAR NOT NULL,
-    status VARCHAR NOT NULL,
-    order_id BIGINT NOT NULL
+    name  VARCHAR NOT NULL
 );
 
---rollback DROP TABLE IF EXISTS shipment;
+--rollback DROP TABLE IF EXISTS retailer;

@@ -23,7 +23,6 @@ public class PaymentController {
 
     @KafkaListener(topics = "new-orders", groupId = "orders-group")
     public void processPayment(String event) throws JsonProcessingException {
-
         log.info("Received event" + event);
         OrderEvent orderEvent = new ObjectMapper().readValue(event, OrderEvent.class);
 
@@ -50,6 +49,7 @@ public class PaymentController {
 
     @KafkaListener(topics = "reversed-payments", groupId = "payments-group")
     public void reversePayment(String event) {
+        log.info("Received event" + event);
         try {
             PaymentEvent paymentEvent = new ObjectMapper().readValue(event, PaymentEvent.class);
             CustomerOrder order = paymentEvent.getOrder();

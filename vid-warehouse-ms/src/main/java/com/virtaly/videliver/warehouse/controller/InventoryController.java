@@ -10,10 +10,7 @@ import com.virtaly.videliver.warehouse.service.InventoryService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -37,14 +34,21 @@ public class InventoryController {
         }
     }
 
+    @GetMapping("/{item}")
+    public List<Inventory> getInventory(@PathVariable String item) {
+        return inventoryService.findByItem(item);
+    }
+
     @KafkaListener(topics = "new-payments", groupId = "payments-group")
     public void updateInventory(String paymentEvent) throws JsonProcessingException {
+        log.info("Received event" + paymentEvent);
         PaymentEvent p = new ObjectMapper().readValue(paymentEvent, PaymentEvent.class);
         inventoryService.updateInventoryForOrder(p.getOrder());
     }
 
     @KafkaListener(topics = "reversed-inventory", groupId = "inventory-group")
     public void reverseInventory(String event) throws JsonProcessingException {
+        log.info("Received event" + event);
         InventoryEvent inventoryEvent = new ObjectMapper().readValue(event, InventoryEvent.class);
         inventoryService.reverseInventoryForOrder(inventoryEvent.getOrder());
     }

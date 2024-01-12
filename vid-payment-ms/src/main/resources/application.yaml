@@ -12,7 +12,7 @@ spring:
   main:
     banner-mode: log
   datasource:
-    url: jdbc:postgresql://localhost:45432/payment
+    url: jdbc:postgresql://localhost:54324/payment
     username: postgres
     password: P@ssw0rd
     driver-class-name: org.postgresql.Driver

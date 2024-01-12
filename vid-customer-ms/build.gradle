@@ -15,6 +15,9 @@ repositories {
 }
 
 dependencies {
+    implementation files('migration')
+    implementation files('migration-test')
+
     implementation project(":vid-common")
 
     implementation platform("org.springframework.boot:spring-boot-dependencies:$springBootVersion")
@@ -24,6 +27,7 @@ dependencies {
 
     implementation "org.postgresql:postgresql"
     implementation "com.h2database:h2"
+    implementation "org.liquibase:liquibase-core"
 
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
@@ -43,3 +47,19 @@ test {
 bootJar {
     archiveFileName.set("${project.name}.jar")
 }
+
+task copyMigrations(type: Copy) {
+    from "${projectDir}/migration"
+    into "${buildDir}/resources/main/migration"
+}
+
+task copyTestMigrations(type: Copy) {
+    from "${projectDir}/migration-test"
+    into "${buildDir}/resources/main/migration-test"
+}
+
+compileJava {
+    dependsOn 'copyMigrations'
+    dependsOn 'copyTestMigrations'
+}
+

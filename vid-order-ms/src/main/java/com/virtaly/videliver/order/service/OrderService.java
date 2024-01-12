@@ -44,6 +44,7 @@ public class OrderService {
 
     @KafkaListener(topics = "reversed-orders", groupId = "orders-group")
     public void reverseOrder(String event) {
+        log.info("Received event" + event);
         try {
             OrderEvent orderEvent = new ObjectMapper().readValue(event, OrderEvent.class);
             Optional<Order> order = orderRepository.findById(orderEvent.getOrder().getOrderId());
@@ -54,6 +55,10 @@ public class OrderService {
         } catch (Exception e) {
             log.error("Error while reversing order", e);
         }
+    }
 
+    public Order getOrder(Long id) {
+        return orderRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException(String.format("Order %s not found", id)));
     }
 }
