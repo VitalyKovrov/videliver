@@ -24,9 +24,9 @@ public class OrderService {
     public Order createOrder(CustomerOrder customerOrder) {
         Order order = new Order();
         try {
-            order.setAmount(customerOrder.getAmount());
-            order.setItem(customerOrder.getItem());
-            order.setQuantity(customerOrder.getQuantity());
+            order.setTotalPrice(customerOrder.getTotalPrice());
+            order.setProductId(customerOrder.getProductId());
+            order.setProductCount(customerOrder.getProductCount());
             order.setStatus("CREATED");
             order = orderRepository.save(order);
             customerOrder.setOrderId(order.getId());

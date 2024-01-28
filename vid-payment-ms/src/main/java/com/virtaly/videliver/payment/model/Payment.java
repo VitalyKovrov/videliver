@@ -20,6 +20,9 @@ public class Payment {
     private Long orderId;
 
     @Column
+    private Long customerId;
+
+    @Column
     private double amount;
 
     @Column

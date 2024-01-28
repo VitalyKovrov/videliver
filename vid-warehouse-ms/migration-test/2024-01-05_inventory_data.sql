@@ -3,14 +3,14 @@
 --changeset vkovrov@it-one.ru:test_data
 --comment: Тестовые данные
 
-INSERT INTO public.inventory (item, quantity)
-VALUES ('Стол', 100)
+INSERT INTO public.inventory (product_id, quantity)
+VALUES (1, 100)
 ON CONFLICT DO NOTHING;
 
-INSERT INTO public.inventory (item, quantity)
-VALUES ('Диван', 200)
+INSERT INTO public.inventory (product_id, quantity)
+VALUES (2, 200)
 ON CONFLICT DO NOTHING;
 
-INSERT INTO public.inventory (item, quantity)
-VALUES ('Шкаф', 300)
+INSERT INTO public.inventory (product_id, quantity)
+VALUES (3, 300)
 ON CONFLICT DO NOTHING;

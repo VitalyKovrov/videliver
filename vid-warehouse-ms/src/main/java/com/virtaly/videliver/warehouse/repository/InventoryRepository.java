@@ -6,5 +6,5 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 
 public interface InventoryRepository extends CrudRepository<Inventory, Long> {
-    List<Inventory> findByItem(String item);
+    List<Inventory> findByProductId(long productId);
 }

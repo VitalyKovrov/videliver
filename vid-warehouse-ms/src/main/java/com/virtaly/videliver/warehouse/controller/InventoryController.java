@@ -23,7 +23,7 @@ public class InventoryController {
 
     @PostMapping
     public void addInventory(@RequestBody Stock stock) {
-        List<Inventory> items = inventoryService.findByItem(stock.getItem());
+        List<Inventory> items = inventoryService.findByProductId(stock.getProductId());
         if (items.iterator().hasNext()) {
             items.forEach(i -> {
                 i.setQuantity(stock.getQuantity() + i.getQuantity());
@@ -34,9 +34,9 @@ public class InventoryController {
         }
     }
 
-    @GetMapping("/{item}")
-    public List<Inventory> getInventory(@PathVariable String item) {
-        return inventoryService.findByItem(item);
+    @GetMapping("/{productId}")
+    public List<Inventory> getInventory(@PathVariable long productId) {
+        return inventoryService.findByProductId(productId);
     }
 
     @KafkaListener(topics = "new-payments", groupId = "payments-group")

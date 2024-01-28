@@ -10,15 +10,18 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CustomerOrder {
-    String item;
-
-    int quantity;
-
-    double amount;
-
-    String paymentMode;
 
     long orderId;
+
+    long customerId;
+
+    long productId;
+
+    int productCount;
+
+    double totalPrice;
+
+    String paymentMode;
 
     String address;
 }

@@ -21,13 +21,13 @@ public class InventoryService {
     private final KafkaTemplate<String, InventoryEvent> kafkaInventoryTemplate;
     private final KafkaTemplate<String, PaymentEvent> kafkaPaymentTemplate;
 
-    public List<Inventory> findByItem(String item) {
-        return inventoryRepository.findByItem(item);
+    public List<Inventory> findByProductId(long productId) {
+        return inventoryRepository.findByProductId(productId);
     }
 
     public Inventory createInventory(Stock stock) {
         Inventory i = new Inventory();
-        i.setItem(stock.getItem());
+        i.setProductId(stock.getProductId());
         i.setQuantity(stock.getQuantity());
         return inventoryRepository.save(i);
     }
@@ -38,14 +38,14 @@ public class InventoryService {
 
     public void updateInventoryForOrder(CustomerOrder order) {
         try {
-            Iterable<Inventory> inventories = inventoryRepository.findByItem(order.getItem());
+            Iterable<Inventory> inventories = inventoryRepository.findByProductId(order.getProductId());
             boolean exists = inventories.iterator().hasNext();
             if (!exists) {
                 throw new Exception("Stock not available");
             }
             inventories.forEach(
                     i -> {
-                        i.setQuantity(i.getQuantity() - order.getQuantity());
+                        i.setQuantity(i.getQuantity() - order.getProductCount());
                         inventoryRepository.save(i);
                     });
             InventoryEvent event = InventoryEvent.builder()
@@ -64,9 +64,9 @@ public class InventoryService {
     }
 
     public void reverseInventoryForOrder(CustomerOrder order) {
-        Iterable<Inventory> inv = inventoryRepository.findByItem(order.getItem());
+        Iterable<Inventory> inv = inventoryRepository.findByProductId(order.getProductId());
         inv.forEach(i -> {
-            i.setQuantity(i.getQuantity() + order.getQuantity());
+            i.setQuantity(i.getQuantity() + order.getProductCount());
             inventoryRepository.save(i);
         });
         PaymentEvent paymentEvent = PaymentEvent.builder()

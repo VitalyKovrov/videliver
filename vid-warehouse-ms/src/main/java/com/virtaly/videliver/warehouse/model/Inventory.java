@@ -11,11 +11,11 @@ public class Inventory {
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     @Column
     private int quantity;
 
     @Column
-    private String item;
+    private long productId;
 }

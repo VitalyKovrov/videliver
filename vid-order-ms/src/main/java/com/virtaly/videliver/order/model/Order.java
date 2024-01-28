@@ -14,13 +14,16 @@ public class Order {
     private long id;
 
     @Column
-    private String item;
+    private long customerId;
 
     @Column
-    private int quantity;
+    private long productId;
 
     @Column
-    private double amount;
+    private int productCount;
+
+    @Column
+    private double totalPrice;
 
     @Column
     private String status;

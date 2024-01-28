@@ -6,9 +6,10 @@
 CREATE TABLE IF NOT EXISTS orders
 (
     id BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    item VARCHAR NOT NULL,
-    quantity INT NOT NULL,
-    amount BIGINT NOT NULL,
+    product_id BIGINT NOT NULL,
+    customer_id BIGINT NOT NULL,
+    product_count INT NOT NULL,
+    total_price DOUBLE NOT NULL,
     status VARCHAR NOT NULL
 );
 

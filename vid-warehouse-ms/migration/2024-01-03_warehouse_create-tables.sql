@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS inventory
 (
     id BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     quantity INT NOT NULL,
-    item VARCHAR NOT NULL
+    product_id BIGINT NOT NULL
 );
 
 --rollback DROP TABLE IF EXISTS inventory;
