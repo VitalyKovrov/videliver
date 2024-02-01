@@ -6,16 +6,16 @@ import javax.persistence.*;
 
 @Data
 @Entity
-@Table(name = "inventory")
-public class Inventory {
+@Table(name = "warehouse")
+public class Warehouse {
+
     @Id
     @Column
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column
-    private int quantity;
+    private String name;
 
     @Column
-    private long productId;
+    private String city;
 }

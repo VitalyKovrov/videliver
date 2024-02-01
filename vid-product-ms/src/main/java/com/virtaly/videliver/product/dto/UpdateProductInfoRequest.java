@@ -1,4 +1,4 @@
-package com.virtaly.videliver.warehouse.dto;
+package com.virtaly.videliver.product.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Stock {
-    private long productId;
-    private int quantity;
+public class UpdateProductInfoRequest {
+    String name;
+    String description;
+    Double price;
 }

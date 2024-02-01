@@ -1,5 +1,6 @@
 package com.virtaly.videliver.delivery.service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.virtaly.videliver.delivery.dto.CustomerOrder;
 import com.virtaly.videliver.delivery.dto.InventoryEvent;
 import com.virtaly.videliver.delivery.model.Shipment;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 public class ShipmentService {
     private final ShipmentRepository shipmentRepository;
     private final KafkaTemplate<String, InventoryEvent> kafkaInventoryTemplate;
+    private final ObjectMapper objectMapper;
 
     public Shipment createShipment(CustomerOrder order) {
         Shipment shipment = new Shipment();
@@ -22,7 +24,7 @@ public class ShipmentService {
             if (order.getAddress() == null) {
                 throw new Exception("Address not present");
             }
-            shipment.setAddress(order.getAddress());
+            shipment.setAddress(objectMapper.writeValueAsString(order.getAddress()));
             shipment.setOrderId(order.getOrderId());
             shipment.setStatus("success");
             shipmentRepository.save(shipment);

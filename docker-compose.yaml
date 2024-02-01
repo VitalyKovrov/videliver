@@ -34,6 +34,17 @@ services:
       SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:19092
     depends_on:
       - init-kafka
+  product-ms:
+    build: ./vid-product-ms
+    restart: always
+    ports:
+      - 8085:8085
+    environment:
+      SERVER_PORT: 8085
+      SPRING_PROFILES_ACTIVE: test
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:19092
+    depends_on:
+      - init-kafka
   warehouse-ms:
     build: ./vid-warehouse-ms
     restart: always

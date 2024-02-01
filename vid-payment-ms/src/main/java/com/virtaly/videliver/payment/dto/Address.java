@@ -9,19 +9,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CustomerOrder {
-
-    long orderId;
-
-    long customerId;
-
-    long productId;
-
-    int productCount;
-
-    double totalPrice;
-
-    String paymentMode;
-
-    Address address;
+public class Address {
+    private String city;
+    private String street;
+    private int house;
+    private int apartment;
 }
