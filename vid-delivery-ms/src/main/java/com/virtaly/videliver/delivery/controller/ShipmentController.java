@@ -17,10 +17,10 @@ public class ShipmentController {
     private final ShipmentService shipmentService;
 
     @KafkaListener(topics = "new-inventory", groupId = "inventory-group")
-    public void updateInventory(String paymentEvent) throws JsonProcessingException {
-        log.info("Received event" + paymentEvent);
-        InventoryEvent inventoryEvent = new ObjectMapper().readValue(paymentEvent, InventoryEvent.class);
-        CustomerOrder order = inventoryEvent.getOrder();
+    public void createShipment(String inventoryEvent) throws JsonProcessingException {
+        log.info("Received event" + inventoryEvent);
+        InventoryEvent i = new ObjectMapper().readValue(inventoryEvent, InventoryEvent.class);
+        CustomerOrder order = i.getOrder();
         this.shipmentService.createShipment(order);
     }
 }

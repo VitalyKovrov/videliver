@@ -9,14 +9,12 @@ import com.virtaly.videliver.warehouse.model.Product;
 import com.virtaly.videliver.warehouse.model.ProductPk;
 import com.virtaly.videliver.warehouse.model.Warehouse;
 import com.virtaly.videliver.warehouse.repository.ProductRepository;
-import com.virtaly.videliver.warehouse.repository.WarehouseRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
