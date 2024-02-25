@@ -28,7 +28,7 @@ spring:
       minimum-idle: 1
       register-mbeans: true
   liquibase:
-    change-log: classpath:liquibase-changelog.xml
+    change-log: classpath:test-liquibase-changelog.xml
     liquibase-schema: public
     enabled: true
 

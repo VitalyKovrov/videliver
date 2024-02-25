@@ -35,6 +35,7 @@ public class PaymentController {
                     .build();
             kafkaPaymentTemplate.send("new-payments", paymentEvent);
         } catch (CustomerAvailableAmountNotEnoughException | NoPaymentInfoForCustomerException e) {
+            log.error("Error while processing payment", e);
             OrderEvent oe = OrderEvent.builder()
                     .order(order)
                     .type("ORDER_REVERSED")

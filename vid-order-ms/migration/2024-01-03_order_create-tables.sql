@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS orders
     product_id BIGINT NOT NULL,
     customer_id BIGINT NOT NULL,
     product_count INT NOT NULL,
-    total_price DOUBLE NOT NULL,
+    total_price DOUBLE PRECISION NOT NULL,
     status VARCHAR NOT NULL
 );
 

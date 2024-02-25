@@ -29,6 +29,7 @@ public class ShipmentService {
             shipment.setStatus("success");
             shipmentRepository.save(shipment);
         } catch (Exception e) {
+            log.error("Error while creating shipment", e);
             shipment.setOrderId(order.getOrderId());
             shipment.setStatus("failed");
             shipmentRepository.save(shipment);

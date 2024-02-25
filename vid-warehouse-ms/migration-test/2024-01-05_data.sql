@@ -8,13 +8,13 @@ VALUES ('Shushary', 'Saint-Petersburg')
 ON CONFLICT DO NOTHING;
 
 INSERT INTO public.product (id, warehouse_id, count)
-VALUES (1, 1, 100)
+VALUES (1, 1, 10)
 ON CONFLICT DO NOTHING;
 
 INSERT INTO public.product (id, warehouse_id, count)
-VALUES (2, 1, 200)
+VALUES (2, 1, 20)
 ON CONFLICT DO NOTHING;
 
 INSERT INTO public.product (id, warehouse_id, count)
-VALUES (3, 1, 300)
+VALUES (3, 1, 30)
 ON CONFLICT DO NOTHING;

@@ -48,6 +48,11 @@ bootJar {
     archiveFileName.set("${project.name}.jar")
 }
 
+task copyMigrationsChangelog(type: Copy) {
+    from "${projectDir}/liquibase-changelog.xml"
+    into "${buildDir}/resources/main"
+}
+
 task copyMigrations(type: Copy) {
     from "${projectDir}/migration"
     into "${buildDir}/resources/main/migration"
@@ -59,6 +64,7 @@ task copyTestMigrations(type: Copy) {
 }
 
 compileJava {
+    dependsOn 'copyMigrationsChangelog'
     dependsOn 'copyMigrations'
     dependsOn 'copyTestMigrations'
 }

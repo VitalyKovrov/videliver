@@ -36,6 +36,7 @@ public class OrderService {
                     .build();
             this.kafkaTemplate.send("new-orders", event);
         } catch (Exception e) {
+            log.error("Error while creating order", e);
             order.setStatus("FAILED");
             this.orderRepository.save(order);
         }

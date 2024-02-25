@@ -37,7 +37,7 @@ public class ProductService {
                 .orElseThrow(() -> new ProductNotFoundException(id));
     }
 
-    public void updateProductCount(WarehouseProduct product) {
+    public void updateProduct(WarehouseProduct product) {
         Optional<Product> foundProductOptional = productRepository.findById(product.getProductId());
         if (foundProductOptional.isPresent()) {
             Product foundProduct = foundProductOptional.get();

@@ -44,6 +44,6 @@ public class ProductController {
     public void updateTotalCount(String productEvent) throws JsonProcessingException {
         log.info("Received event" + productEvent);
         ProductEvent p = new ObjectMapper().readValue(productEvent, ProductEvent.class);
-        productService.updateProductCount(p.getProduct());
+        productService.updateProduct(p.getProduct());
     }
 }

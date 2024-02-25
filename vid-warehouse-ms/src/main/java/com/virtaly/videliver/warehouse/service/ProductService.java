@@ -61,6 +61,7 @@ public class ProductService {
                     .build();
             kafkaInventoryTemplate.send("new-inventory", event);
         } catch (Exception e) {
+            log.error("Error while updating inventory", e);
             PaymentEvent pe = PaymentEvent.builder()
                     .order(order)
                     .type("PAYMENT_REVERSED")

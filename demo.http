@@ -1,0 +1,26 @@
+# Запустить postgres и kafka
+docker-compose -f ./docker-compose-postgres-kafka.yaml up
+
+###
+
+# Создать заказ
+curl -X POST -H "Content-Type: application/json" \
+      --data '{"customerId": 1, "productId": 1, "productCount": 2, "totalPrice": 500.00, "paymentMode": "Credit card", "address": {"city": "Saint-Petersburg", "street": "", "house": 1, "apartment": 1}}' "http://localhost:8083/orders"
+
+###
+
+# Посмотреть статус заказа
+curl -X GET -H "Accept: application/json" http://localhost:8083/orders/1
+
+###
+
+# Создать заказ
+curl -X POST -H "Content-Type: application/json" \
+      --data '{"customerId": 1, "productId": 1, "productCount": 2, "totalPrice": 500.00, "paymentMode": "Credit card", "address": {"city": "Moscow", "street": "", "house": 1, "apartment": 1}}' "http://localhost:8083/orders"
+
+###
+
+# Посмотреть статус заказа
+curl -X GET -H "Accept: application/json" http://localhost:8083/orders/2
+
+###
