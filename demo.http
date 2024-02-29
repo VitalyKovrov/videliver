@@ -1,5 +1,5 @@
-# Запустить postgres и kafka
-docker-compose -f ./docker-compose-postgres-kafka.yaml up
+# Запустить kafka и сервисы
+docker-compose up
 
 ###
 
